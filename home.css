@@ -1,0 +1,344 @@
+/****************************************************************
+***************************HOME**********************************
+****************************************************************/
+
+.hero__grid {
+  display: grid;
+  gap: var(--space-7);
+  align-items: center;
+}
+
+.hero__content p {
+  max-width: 58ch;
+  font-size: 1.05rem;
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+.hero__media { min-height: 320px; }
+
+.placeholder-media {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, var(--color-panel), var(--color-panel-2));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-soft);
+  box-shadow: var(--shadow-soft);
+  padding: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .hero__grid { grid-template-columns: 1.1fr 0.9fr; }
+}
+
+/* ===============================
+   QUICK SHOP (HERO STYLE CARDS)
+=============================== */
+
+.quick-shop__grid {
+  gap: 20px;
+}
+
+/* CARD */
+.quick-card {
+  position: relative;
+  display: block;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 260px;
+  isolation: isolate;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quick-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* IMAGE */
+.quick-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+.quick-card:hover img {
+  transform: scale(1.05);
+  transition: transform 0.5s ease;
+}
+
+/* DARK OVERLAY 
+.quick-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.7) 0%,
+    rgba(0,0,0,0.3) 50%,
+    rgba(0,0,0,0.1) 100%
+  );
+  z-index: 1;
+}
+*/
+
+.quick-card--nicotine .quick-card__overlay {
+  background: linear-gradient(to top, rgba(0,80,255,0.6), rgba(0,0,0,0.3));
+}
+
+.quick-card--caffeine .quick-card__overlay {
+  background: linear-gradient(to top, rgba(255,120,0,0.6), rgba(0,0,0,0.3));
+}
+
+/* CONTENT */
+.quick-card__content {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 2;
+}
+
+.quick-card h2 {
+  font-size: 1.3rem;
+  margin: 0;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+/* RESPONSIVE */
+@media (min-width: 1024px) {
+  .quick-card {
+    min-height: 320px;
+  }
+}
+
+.quick-add-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.quick-add-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.quick-add-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+}
+
+.quick-add-modal__panel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(92vw, 440px);
+  transform: translate(-50%, -50%);
+  background: #121319;
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 1.25rem;
+  box-shadow: 0 20px 80px rgba(0,0,0,0.45);
+}
+
+.quick-add-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.quick-add-modal__top {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.quick-add-modal__image {
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+}
+
+.quick-add-modal__image img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  padding: 0.5rem;
+}
+
+.quick-add-modal__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.quick-add-modal__price {
+  margin-top: 0.35rem;
+  font-weight: 700;
+}
+
+.quick-add-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.quick-add-group {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.quick-add-group__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.quick-add-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.quick-add-pill {
+  border: 1px solid var(--color-border);
+  background: rgba(255,255,255,0.03);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quick-add-pill:hover {
+  border-color: var(--color-accent);
+}
+
+.quick-add-pill.is-active {
+  background: var(--color-accent);
+  border-color: transparent;
+  color: #fff;
+}
+
+.quick-add-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  width: fit-content;
+}
+
+.quick-add-qty__input {
+  width: 44px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  text-align: center;
+  padding: 0;
+  font-size: 1rem;
+}
+
+.quick-add-submit {
+  width: 100%;
+}
+
+.quick-add-qty__input::-webkit-outer-spin-button,
+.quick-add-qty__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quick-add-qty__input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.quick-add-qty__input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.quick-add-submit {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0;
+}
+
+.quick-add-submit .button-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.quick-add-submit.is-disabled,
+.quick-add-submit:disabled,
+.product-card__actions .btn.is-disabled,
+.product-card__actions .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none !important;
+}
+
+.quick-add-submit:not(.is-disabled):not(:disabled) {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.quick-add-open {
+  cursor: pointer;
+}
+
+/* SECTION CTA UNDER PRODUCT GRIDS */
+.section-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.section-actions .btn {
+  margin-top: 0;
+  width: auto;
+  min-width: 0;
+}
+
+/* Optional: a bit more breathing room on larger screens */
+@media (min-width: 768px) {
+  .section-actions {
+    margin-top: 32px;
+  }
+}
