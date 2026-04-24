@@ -722,3 +722,32 @@
     display: inline-flex !important;
   }
 }
+/* =========================
+   DRAWER STABILITY PATCH
+========================= */
+.kangoo-mega-drawer,
+.cart-drawer,
+.account-drawer {
+  z-index: 10060;
+}
+
+.kangoo-mega-drawer__panel,
+.cart-drawer__panel,
+.account-drawer__panel {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+@media (max-width: 1023px) {
+  .kangoo-mega-drawer__panel,
+  .cart-drawer__panel,
+  .account-drawer__panel {
+    width: 100vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-header__menu-toggle {
+    display: none !important;
+  }
+}
