@@ -4,7 +4,7 @@ FILE: assets/css/account-drawer.css
 .account-drawer {
   position: fixed;
   inset: 0;
-  z-index: 10020;
+  z-index: 10060;
   pointer-events: none;
 }
 
@@ -37,6 +37,7 @@ FILE: assets/css/account-drawer.css
   transition: transform 0.32s ease;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .account-drawer.is-open .account-drawer__panel {

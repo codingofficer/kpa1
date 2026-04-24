@@ -157,7 +157,7 @@
 .cart-drawer {
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: 10060;
   pointer-events: none;
 }
 
@@ -633,4 +633,12 @@
 .quick-add-submit .button-total {
   margin-left: auto;
   white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .cart-drawer__panel {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 }

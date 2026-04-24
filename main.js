@@ -111,19 +111,52 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  function normalizeMegaPanelKey(panelKey) {
+    const normalized = (panelKey || '').toString().trim().toLowerCase();
+
+    if (normalized === 'brand' || normalized === 'brands') {
+      return 'brands';
+    }
+
+    if (normalized === 'strength' || normalized === 'strengths') {
+      return 'strengths';
+    }
+
+    if (
+      normalized === 'flavour' ||
+      normalized === 'flavours' ||
+      normalized === 'flavor' ||
+      normalized === 'flavors'
+    ) {
+      return 'flavours';
+    }
+
+    return normalized;
+  }
+
   function setActiveMegaPanel(panelKey) {
-    if (!panelKey) {
+    const requestedKey = normalizeMegaPanelKey(panelKey);
+    const hasPanel = Array.from(megaPanels).some(function (panel) {
+      return panel.getAttribute('data-mega-panel') === requestedKey;
+    });
+    const fallbackKey = megaPanels.length > 0
+      ? megaPanels[0].getAttribute('data-mega-panel')
+      : '';
+    const activeKey = hasPanel ? requestedKey : fallbackKey;
+
+    if (!activeKey) {
       return;
     }
 
     megaPanelTriggers.forEach(function (trigger) {
-      const isActive = trigger.getAttribute('data-mega-panel-trigger') === panelKey;
+      const triggerKey = normalizeMegaPanelKey(trigger.getAttribute('data-mega-panel-trigger'));
+      const isActive = triggerKey === activeKey;
       trigger.classList.toggle('is-active', isActive);
       trigger.setAttribute('aria-pressed', isActive ? 'true' : 'false');
     });
 
     megaPanels.forEach(function (panel) {
-      const isActive = panel.getAttribute('data-mega-panel') === panelKey;
+      const isActive = panel.getAttribute('data-mega-panel') === activeKey;
       panel.classList.toggle('is-active', isActive);
     });
   }
