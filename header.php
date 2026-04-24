@@ -29,7 +29,26 @@ $kangoo_strength_cards  = !empty($kangoo_mega_menu['strength_cards']) && is_arra
 $kangoo_flavour_cards   = !empty($kangoo_mega_menu['flavour_cards']) && is_array($kangoo_mega_menu['flavour_cards']) ? $kangoo_mega_menu['flavour_cards'] : array();
 $kangoo_mobile_sections = !empty($kangoo_mega_menu['mobile_sections']) && is_array($kangoo_mega_menu['mobile_sections']) ? $kangoo_mega_menu['mobile_sections'] : array();
 
-$kangoo_default_panel = 'brands';
+$kangoo_normalize_panel_key = static function ($panel_key) {
+    $value = strtolower(trim((string) $panel_key));
+
+    if (in_array($value, array('brand', 'brands'), true)) {
+        return 'brands';
+    }
+
+    if (in_array($value, array('strength', 'strengths'), true)) {
+        return 'strengths';
+    }
+
+    if (in_array($value, array('flavour', 'flavours', 'flavor', 'flavors'), true)) {
+        return 'flavours';
+    }
+
+    return $value;
+};
+
+$kangoo_available_panels = array('brands', 'strengths', 'flavours');
+$kangoo_default_panel    = 'brands';
 
 foreach ($kangoo_sidebar_links as $kangoo_item) {
     if (
@@ -38,8 +57,12 @@ foreach ($kangoo_sidebar_links as $kangoo_item) {
         $kangoo_item['type'] === 'panel' &&
         $kangoo_item['panel_key'] !== ''
     ) {
-        $kangoo_default_panel = (string) $kangoo_item['panel_key'];
-        break;
+        $candidate = $kangoo_normalize_panel_key($kangoo_item['panel_key']);
+
+        if (in_array($candidate, $kangoo_available_panels, true)) {
+            $kangoo_default_panel = $candidate;
+            break;
+        }
     }
 }
 
@@ -159,7 +182,7 @@ if (current_user_can('manage_options')) {
                                 <button
                                     type="button"
                                     class="kangoo-mega-menu__sidebar-link<?php echo $panel === $kangoo_default_panel ? ' is-active' : ''; ?>"
-                                    data-mega-panel-trigger="<?php echo esc_attr($panel); ?>"
+                                    data-mega-panel-trigger="<?php echo esc_attr($kangoo_normalize_panel_key($panel)); ?>"
                                 >
                                     <?php echo esc_html($label); ?>
                                 </button>
